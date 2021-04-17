@@ -15,7 +15,7 @@ ReactDOM.render(
     <Posts />
     {/* <ToDoList/> */}
     {/* <UsersList /> */}
-    <Albums />
+    {/* <Albums /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

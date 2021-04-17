@@ -35,7 +35,7 @@ export default class Posts extends Component {
     render() {
         
         return (
-            <div className="container">
+            <div>
                 {this.state.posts.map((item,index)=>{
                     return (
                         <div className="postItems" id={item.id} key={index}>
