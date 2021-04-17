@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './App';
 import NavBar from './Components/NavBar';
+import UsersList from './Components/UsersList';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <NavBar />
+    <UsersList />
   </React.StrictMode>,
   document.getElementById('root')
 );
