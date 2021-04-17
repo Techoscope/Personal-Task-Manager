@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/NavBar.css';
+import {Link} from "react-router-dom";
 
 class NavBar extends React.Component {
   render () {
@@ -8,10 +9,10 @@ class NavBar extends React.Component {
         <div className='brand'>PTM</div>
         <nav>
           <ul>
-            <li><a href="#">Users List</a></li>
-            <li><a href="#">Todo Lists</a></li>
-            <li><a href="#">Posts</a></li>
-            <li><a href="#">Albums</a></li>
+            <li><Link to="/">Users List</Link></li>
+            <li><Link to="/todos">Todo Lists</Link></li>
+            <li><Link to="/posts">Posts</Link></li>
+            <li><Link to="/albums">Albums</Link></li>
           </ul>
         </nav>
         <div className='auth'><a href="#">Logout</a></div>
