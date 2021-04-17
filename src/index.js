@@ -5,12 +5,14 @@ import ReactDOM from 'react-dom';
 import NavBar from './Components/NavBar';
 import UsersList from './Components/UsersList';
 import reportWebVitals from './reportWebVitals';
-import ToDoList from './Components/ToDoList'
+import ToDoList from './Components/ToDoList';
+import Posts from "./Components/Posts"
 
 ReactDOM.render(
   <React.StrictMode>
     <NavBar />
-    <ToDoList/>
+    <Posts />
+    {/* <ToDoList/> */}
     {/* <UsersList /> */}
   </React.StrictMode>,
   document.getElementById('root')
