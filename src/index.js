@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 // import App from './App';
 import NavBar from './Components/NavBar';
 import UsersList from './Components/UsersList';
-import reportWebVitals from './reportWebVitals';
 import ToDoList from './Components/ToDoList';
 import Posts from "./Components/Posts"
+import Albums from "./Components/Albums";
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
     <Posts />
     {/* <ToDoList/> */}
     {/* <UsersList /> */}
+    <Albums />
   </React.StrictMode>,
   document.getElementById('root')
 );
