@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './App';
 import NavBar from './Components/NavBar';
-import UsersList from './Components/UsersList';
+// import UsersList from './Components/UsersList';
 import reportWebVitals from './reportWebVitals';
-import ToDoList from './Components/ToDoList'
+// import ToDoList from './Components/ToDoList';
+import Albums from "./Components/Albums";
 
 ReactDOM.render(
   <React.StrictMode>
     <NavBar />
-    <ToDoList/>
+    {/* <ToDoList/> */}
     {/* <UsersList /> */}
+    <Albums />
   </React.StrictMode>,
   document.getElementById('root')
 );
