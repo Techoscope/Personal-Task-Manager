@@ -11,7 +11,7 @@ import {
 import NavBar from './Components/NavBar';
 import UsersList from './Components/UsersList';
 import ToDoList from './Components/ToDoList';
-import Posts from "./Components/Posts"
+import Posts from "./Components/Posts";
 import Albums from "./Components/Albums";
 import reportWebVitals from './reportWebVitals';
 
