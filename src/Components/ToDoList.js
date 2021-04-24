@@ -1,4 +1,4 @@
-import { getByTitle } from '@testing-library/dom';
+// import { getByTitle } from '@testing-library/dom';
 import {React, Component} from 'react';
 import '../styles/ToDoList.css'
 
@@ -40,7 +40,7 @@ class ToDoList extends Component{
     }
     completeItem =(e)=>{
         //alert('')
-        const item ={completed:e.target.checked ? 'line-through':'none'}
+        // const item ={completed:e.target.checked ? 'line-through':'none'}
         
         
     }
