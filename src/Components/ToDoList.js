@@ -1,6 +1,6 @@
 import { getByTitle } from '@testing-library/dom';
 import {React, Component} from 'react';
-import './ToDoList.css'
+import '../styles/ToDoList.css'
 
 class ToDoList extends Component{
     constructor(props){
