@@ -1,0 +1,17 @@
+button{
+    border-color: rgb(185, 107, 5);
+    padding-left: 10px;
+    margin-left: 10px;
+    color:green
+}
+span{
+    font-style: italic;
+    color:crimson;
+    text-decoration:underline;
+    cursor: pointer;
+    padding-left: 20px;    
+}
+
+ul{
+    list-style-type: none;
+}

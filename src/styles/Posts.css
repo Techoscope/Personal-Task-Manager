@@ -1,0 +1,28 @@
+
+*{
+    margin:0;
+    padding: 0;
+}
+
+.postItems{
+    margin-left: 32px;
+    margin-right: 32px;
+    
+}
+
+.container{
+    
+}
+
+#removeSpan{
+    font-size: 8px;
+    float: right;
+}
+
+h3{
+    padding: 1%;
+}
+
+p{
+    padding: 1%;
+}
