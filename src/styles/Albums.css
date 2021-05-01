@@ -14,3 +14,13 @@
   margin: 0 auto;
   text-align: center;
 }
+
+
+.addbtn {
+  background-color:chartreuse;
+
+}
+.cancelbtn {
+background-color: darkred;
+
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/Albums.css'
+import AlbumForm from './AlbumForm';
 
 
 
@@ -8,7 +9,8 @@ import '../styles/Albums.css'
         super(props)
 
         this.state = {
-            albums: []
+            albums: [],
+            showForm:false
         }
     }
 
@@ -16,11 +18,32 @@ import '../styles/Albums.css'
         this.getAlbums()
     }
 
+    showFormFunc=()=>{
+        this.setState({
+            showForm:!this.state.showForm
+
+        })
+
+    }
+
+    addAlbums =(param)=>{
+        console.log(param)
+        this.setState({
+            albums:[...this.state.albums, param]
+
+
+        })
+
+   
+        
+
+    }
+
     getAlbums = () => {
         fetch('https://jsonplaceholder.typicode.com/albums')
   .then(response => response.json())
   .then(json => {
-      console.log(json)
+    //   console.log(json)
       return this.setState({albums: json})
   }
     )
@@ -31,6 +54,9 @@ import '../styles/Albums.css'
         return (
             <div>
              <h2>Albums List</h2>
+             <button onClick={this.showFormFunc}>ADD ALBUMS</button>
+             {this.state.showForm?  <AlbumForm showFormFunc={this.showFormFunc} addAlbums={this.addAlbums}/> : '' }
+             
              <div className='album-container'>
              {this.state.albums.map((item,index) => {
                  return <a href= '#' className='container' key={index}>
