@@ -1,11 +1,14 @@
 import {React, Component} from 'react';
+import axios from 'axios'
 import '../styles/ToDoList.css'
 
 class ToDoList extends Component{
     constructor(props){
         super(props)
         this.state ={
-            toDos:[]
+            toDos:[],
+            hideAddForm: true,
+            todoItem: ""
         }
 
     }
@@ -34,6 +37,28 @@ class ToDoList extends Component{
         e.target.parentElement.remove();
 
     }
+
+    handleAddForm = () => {
+        this.setState({
+            hideAddForm: !this.state.hideAddForm
+        })
+    }
+
+    handleAddInput = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = () => {
+        axios.post("https://jsonplaceholder.typicode.com/todos", {title:this.state.todoItem})
+        .then(resp=>{
+            this.setState({
+                toDos: [...this.state.toDos,resp.data]
+            })
+        })
+    }
+
     completeItem =(e)=>{
         //alert('')
         // const item ={completed:e.target.checked ? 'line-through':'none'} 
@@ -42,9 +67,14 @@ class ToDoList extends Component{
     render() {
         return (
             <div>
-                <input type='text' />
-                <button onClick={this.addItems}>Add</button>
-              
+                <button type='button' onClick={this.handleAddForm} hidden={!this.state.hideAddForm}>Add</button>
+
+                <div hidden={this.state.hideAddForm}>
+                    <input type='text' name='todoItem' onChange={this.handleAddInput} value={this.state.todoItem}/>
+                    <button onClick={this.handleAddForm}>Cancel</button>
+                    <button onClick={this.addItems} onClick={this.handleSubmit}>Add</button>
+                </div>
+
                 <ul>
                     {this.state.toDos.map((item)=>{
                         return(
