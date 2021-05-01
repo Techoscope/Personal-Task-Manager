@@ -1,6 +1,5 @@
 import React from 'react';
 import Form from "./Form"
-import axios from "axios"
 
 class UsersList extends React.Component {
   state = {
@@ -14,8 +13,10 @@ class UsersList extends React.Component {
     })
   }
   
-  addUser = () => {
-    
+  addUser = (param) => {
+    this.setState({
+      users: [...this.state.users,param]
+    })
   }
 
   render() {
@@ -25,7 +26,7 @@ class UsersList extends React.Component {
           <h2>All Users List</h2>
           <button onClick={this.handleClick}>Add</button>
           <div>
-            {this.state.clicked ? <Form /> : null}
+            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser}/> : null}
           </div>
 
           <table width="100%">
