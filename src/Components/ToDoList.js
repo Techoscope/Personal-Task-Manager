@@ -1,4 +1,3 @@
-import { getByTitle } from '@testing-library/dom';
 import {React, Component} from 'react';
 import '../styles/ToDoList.css'
 
@@ -12,7 +11,6 @@ class ToDoList extends Component{
     }
     componentDidMount(){
         this.toDosFetch()
-
     }
 
     toDosFetch=()=>{
@@ -23,9 +21,7 @@ class ToDoList extends Component{
             this.setState({
                 toDos:json
             })
-        })
-
-            
+        })   
     }
     addItems =(e)=>{
         
@@ -40,9 +36,7 @@ class ToDoList extends Component{
     }
     completeItem =(e)=>{
         //alert('')
-        const item ={completed:e.target.checked ? 'line-through':'none'}
-        
-        
+        // const item ={completed:e.target.checked ? 'line-through':'none'} 
     }
     
     render() {

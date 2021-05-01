@@ -1,15 +1,35 @@
 import React from 'react';
+import Form from "./Form"
+
 
 class UsersList extends React.Component {
   state = {
-    users: []
+    users: [],
+    clicked: false
   }
   
+  handleClick = () => {
+    this.setState({
+      clicked: !this.state.clicked
+    })
+  }
+  
+  addUser = (param) => {
+    this.setState({
+      users: [...this.state.users,param]
+    })
+  }
+
   render() {
     if(this.state.users.length){
       return (
         <div>
           <h2>All Users List</h2>
+          <button onClick={this.handleClick}>Add</button>
+          <div>
+            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser}/> : null}
+          </div>
+
           <table width="100%">
             <thead>
               <tr>
