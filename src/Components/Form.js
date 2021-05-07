@@ -23,7 +23,6 @@ export default class Form extends Component {
             this.props.addUser(resp.data)
         })
     }
-    
     render() {
         console.log(this.state)
         return (
@@ -40,3 +39,4 @@ export default class Form extends Component {
         )
     }
 }
+
