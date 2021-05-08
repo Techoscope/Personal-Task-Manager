@@ -1,0 +1,20 @@
+header {
+  height: 72px;
+  background-color: lightgrey;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+nav li {
+  display: inline-block;
+  padding: 10px;
+}
+
+.auth {
+  margin-left: auto;
+}
+
+.brand {
+  font-size: 24px;
+}
