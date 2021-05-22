@@ -1,7 +1,6 @@
 import React from 'react';
 import Form from "./Form"
 
-
 class UsersList extends React.Component {
   state = {
     users: [],
