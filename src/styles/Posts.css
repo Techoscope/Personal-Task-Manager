@@ -9,20 +9,66 @@
     margin-right: 32px;
     
 }
-
-.container{
+#createPostBtn{
+    margin-left: 3%;
+    background-color:hotpink;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     
 }
 
-#removeSpan{
-    font-size: 8px;
-    float: right;
+#inputTitle {
+    width: 250px;
+    height: 25px;
+    margin-left: 3%;
 }
 
+#inputPost {
+    width: 250px;
+    height: 75px;
+    margin-left: 3%;
+}
+#cancelPost{
+    background-color: rgb(224, 7, 7);
+    color: white;
+    padding: 0.5% 1%;
+    width: 75px;
+    margin-top: 1%;
+    margin-left: 3%;
+}
+#savePost{
+    background-color: rgb(6, 153, 6);
+    color: white;
+    padding: 0.5% 1%;
+    width: 75px;
+    margin-top: 1%;
+    margin-left: 3%;
+}
+#editSpan{
+    font-size: 15px;
+    float: right;
+    color: green;
+    margin-right: 10px;
+}
+
+#removeSpan{
+    font-size: 15px;
+    float: right;
+}
+h2{
+    padding : 1%;
+    margin-left: 2%;
+}
 h3{
     padding: 1%;
 }
 
 p{
     padding: 1%;
+}
+label{
+    margin-left: 3%; 
+    text-align: justify;
 }

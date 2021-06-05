@@ -1,4 +1,4 @@
-import {React, Component} from 'react';
+import React,{Component} from 'react';
 import '../styles/ToDoList.css'
 
 class ToDoList extends Component{

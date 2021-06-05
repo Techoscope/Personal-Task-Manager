@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import "../styles/Posts.css";
-import axios from 'axios'
 
 export default class Posts extends Component {
     constructor(props){
         super(props);
         this.state = {
             posts: [],
-            title:'',
-            body:''
-
+            editClick:true,
+            postClicked: false
         }
     }
 
@@ -33,42 +31,50 @@ export default class Posts extends Component {
             method: "DELETE"
         }
 
-        fetch("https://jsonplaceholder.typicode.com/posts" + e.target.parentElement.id, data);
-        e.target.parentElement.remove()
+        fetch("https://jsonplaceholder.typicode.com/posts" + e.target.parentElement.parentElement.id, data);
+        e.target.parentElement.parentElement.remove()
     }
-    handleClick=()=>{
-        axios.post("https://jsonplaceholder.typicode.com/posts", {title:this.state.title,body:this.state.body})
-        .then(resp=>{
-           this.setState({posts:[...this.state.posts,resp.data]})
-        })
+    
+    editPost =(e)=>{
+        console.log(e)
+
     }
+
+    createPost = () => {
+        this.setState ({postClicked: !this.state.postClicked})
+      }
+     // Todo: create addPost and cancelPost method
+    
+
 
     render() {
         console.log(this.state)
         return (
             <div>
-                <label>TITLE</label>
-                <br/>
-                <input type='text' name='title'value={this.state.title} 
-                 onChange={this.handleInput}/>
-                <br/>
-                <label>BODY</label>
-                <br/>
-                <input type='text' name='body' value={this.state.body} onChange={this.handleInput} />
-                <br/> <br/>
-                <button onClick={this.handleClick}>Add</button>
-                <button>Cancel</button>
+                <h2>All Posts</h2>
+                <button id="createPostBtn" onClick ={this.createPost}> Create Post </button>
+                {this.state.postClicked ? 
+                <form>
+                    <label>Title</label><br/>
+                    <input id="inputTitle" type="text" placeholder ="Enter your title!"/><br/>
+                    <label>Body</label><br/>
+                    <input id="inputPost" type="text" placeholder = "Enter your post!" /><br/>
+                    <button onClick={this.cancelPost} id="cancelPost">Cancel</button> 
+                    <button onClick={this.addPost} id="savePost">Save</button>       
+                </form> : null}
+
                 {this.state.posts.map((item,index)=>{
                     return (
-                        <div className="postItems" id={item.id} key={index}>
+                        <div className="postitems" id={item.id} key={index}>
                             <h3 key={index}>{item.title}</h3>
-                            <span id="removeSpan" onClick={this.removePost}>Delete</span>
+                            {/* <span id="removeSpan" onClick={this.removePost}>Delete</span> */}
+                            <span>
+                            <i className="fas fa-trash" id="removeSpan" onClick={this.removePost}></i>
+                            <i className="fas fa-pen" id="editSpan" onClick={this.editPost}></i>
+                            </span>
                             <p>{item.body}</p>
-                            
-
                             <hr />
-                        </div>
-                        
+                        </div> 
                     )
                 })}
             </div>
