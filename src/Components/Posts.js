@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PostForm from "./PostForm"
 import "../styles/Posts.css";
-
 
 export default class Posts extends Component {
     constructor(props){
@@ -25,7 +23,9 @@ export default class Posts extends Component {
     componentDidMount(){
         this.fetchPosts()
     }
-
+     handleInput = (e) => {
+ this.setState({[e.target.name]:e.target.value})
+     }
     removePost = (e) => {
         const data = {
             method: "DELETE"
@@ -43,18 +43,12 @@ export default class Posts extends Component {
     createPost = () => {
         this.setState ({postClicked: !this.state.postClicked})
       }
-
-    addPost = () =>{
-
-    }
-
-    cancelPost =(e) =>{
-       
-    }
+     // Todo: create addPost and cancelPost method
+    
 
 
     render() {
-        
+        console.log(this.state)
         return (
             <div>
                 <h2>All Posts</h2>
