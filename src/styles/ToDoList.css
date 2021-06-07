@@ -1,17 +1,100 @@
-button{
+.addButtonToDoList{
     border-color: rgb(185, 107, 5);
-    padding-left: 10px;
-    margin-left: 10px;
-    color:green
+    padding: 0.25% 2%;
+    margin: 0 1%;
+    color:green;
+    border-radius: 0.15rem;
 }
-span{
+.addButtonToDoList:hover{
+    cursor: pointer;
+}
+#todo_input{
+    width: 150px;
+    margin: 1% 0.25% 1% 3%;
+    padding: 0.25% 1%;
+}
+.todoItems{
+    outline: none;
+    border: none;
+    width: 220px;
+    background-color: rgb(240, 216, 216);
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    margin-bottom: 2%;
+}
+/* .deleteSpan{
     font-style: italic;
     color:crimson;
     text-decoration:underline;
     cursor: pointer;
     padding-left: 20px;    
+} */
+
+.toDoListUL{
+    list-style-type: none;
+    margin-left: 3%;
 }
 
-ul{
-    list-style-type: none;
+#userSuccesful{
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(86, 192, 72);
+    display: none;
+}
+
+.requires{
+    font-size: 10px;
+    color: red;
+    margin-left: 0;
+    display: none;
+}
+
+.trashIcons{
+    margin-left: 1%;
+    font-size:large;
+    color: red;
+}
+.trashIcons:hover{
+    cursor: pointer;
+}
+.editIcons {
+    margin-left: 1%;
+    font-size:large;
+    color: blue;
+}
+.editIcons:hover{
+    cursor: pointer;
+}
+.checkIcons {
+    margin-left: 1%;
+    font-size:large;
+    color: green;
+}
+.checkIcons:hover{
+    cursor: pointer;
+}
+.cancelIcons {
+    margin-left: 1%;
+    font-size:large;
+    color: rgb(141, 19, 19);
+}
+.cancelIcons:hover{
+    cursor: pointer;
+}
+
+.iconsToEdit{
+    display: none;
+}
+
+
+.showClassName{
+    display: inline;
+}
+
+.hideClassName {
+    display: none;
+}
+
+.highlightInputs {
+    background-color: rgb(64, 187, 187);;
 }
