@@ -1,0 +1,24 @@
+{
+  "name": "personal-task-manager-backend",
+  "version": "0.1.0",
+  "description": "\"It is a backend applicaton for the personal task manager bootcamp project\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "rest",
+    "api"
+  ],
+  "author": "cemil",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13"
+  }
+}
