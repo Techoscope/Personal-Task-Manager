@@ -19,7 +19,7 @@ class ToDoList extends Component{
     }
 
     toDosFetch=()=>{
-        fetch('https://jsonplaceholder.typicode.com/todos')
+        fetch('http://localhost:8080/api/todos')
         .then(response => response.json())
         .then(json => {
             //console.log(json)
@@ -30,7 +30,7 @@ class ToDoList extends Component{
     }
     addItems =(e)=>{
         if(this.state.input){
-            axios.post("https://jsonplaceholder.typicode.com/todos", {title: this.state.input})
+            axios.post("http://localhost:8080/api/todos", {title: this.state.input})
             .then(response => {
                 console.log(response.data)
                 this.setState({
@@ -65,7 +65,7 @@ class ToDoList extends Component{
     completeItem =(e)=>{
         // if condition is written in the inline CSS!!
 
-        axios.put("https://jsonplaceholder.typicode.com/todos/" + e.target.parentElement.id, {completed: e.target.checked})
+        axios.put("http://localhost:8080/api/todos/" + e.target.parentElement.id, {completed: e.target.checked})
         .then(res => console.log(res.data))
         
         e.target.parentElement.querySelector(".todoItems").style.textDecoration = e.target.checked ? 'line-through' : 'none';
@@ -149,7 +149,7 @@ class ToDoList extends Component{
                            <li key={index} id={item.id} className="todosList">
                            <input onClick={this.completeItem} type='checkbox'/>
 
-                           <input type="text" defaultValue={item.title} className="todoItems" readOnly={true} onChange={this.handleUpdate} style={{textDecoration: item.checked ? "line-through" : "none"}}/> 
+                           <input type="text" defaultValue={item.title} className="todoItems" readOnly={true} onChange={this.handleUpdate} style={{textDecoration: item.completed ? "line-through" : "none"}}/> 
 
                            <span>
                                 <i className="fas fa-pen editIcons" onClick={this.editTodos}></i>

@@ -2,7 +2,7 @@ module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
       title: String,
-      published: Boolean
+      completed: Boolean
     },
     { timestamps: true }
   );
