@@ -79,7 +79,20 @@ exports.update = (req, res) => {
 
 // Delete a Todo Item with the specified id in the request
 exports.delete = (req, res) => {
-  
+  const id = req.params.id;
+  Todo.findByIdAndRemove(id)
+  .then(data => {
+    if (!data) {
+      res.status(404).send({
+        message: `Cannot delete Todo Item with id=${id}. Maybe item was not found!`
+      });
+    } else res.send({ message: "Todo Item was updated successfully." });
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Error deleting Todo item with id=" + id
+    });
+  });
 };
 
 // Delete all Todo Items from the database.

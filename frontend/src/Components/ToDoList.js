@@ -58,17 +58,33 @@ class ToDoList extends Component{
         
         fetch('https://jsonplaceholder.typicode.com/todos/' + e.target.parentElement.parentElement.id, data)
         .then(response => response.json())
-        .then(jsonResponse => console.log(jsonResponse))
-        e.target.parentElement.parentElement.remove();
+        .then(jsonResponse => {
+            console.log(jsonResponse)
+            e.target.parentElement.parentElement.remove();
+        })
+        
 
     }
     completeItem =(e)=>{
         // if condition is written in the inline CSS!!
 
-        axios.put("http://localhost:8080/api/todos/" + e.target.parentElement.id, {completed: e.target.checked})
-        .then(res => console.log(res.data))
+        if(e.target.checked){
+            axios.put("http://localhost:8080/api/todos/" + e.target.parentElement.id, {completed: e.target.checked})
+            .then(res => {
+                console.log(res.data);
+                e.target.checked = true;
+                e.target.parentElement.querySelector(".todoItems").style.textDecoration = e.target.checked ? 'line-through' : 'none';
+            })
+        } else {
+            axios.put("http://localhost:8080/api/todos/" + e.target.parentElement.id, {completed: e.target.checked})
+            .then(res => {
+                console.log(res.data);
+                e.target.checked = false;
+                e.target.parentElement.querySelector(".todoItems").style.textDecoration = e.target.checked ? 'line-through' : 'none';
+            })
+        }
         
-        e.target.parentElement.querySelector(".todoItems").style.textDecoration = e.target.checked ? 'line-through' : 'none';
+        
     }
 
     editTodos = (e) => {
@@ -106,13 +122,13 @@ class ToDoList extends Component{
     }
 
     saveChanges = (e) => {
-
+        const parentID = parseInt(e.target.parentElement.parentElement.id);
         if(this.state.updateInputValue !== ""){
             axios.put("https://jsonplaceholder.typicode.com/todos/" + e.target.parentElement.parentElement.id, { title: this.state.updateInputValue})
             .then( res => console.log(res.data) )
             .then(()=>{
                 this.setState({...this.state, todos: this.state.todos.filter(item => {
-                    return item.id == e.target.parentElement.parentElement.id ? item.title = this.state.updateInputValue : item
+                    return item.id === e.target.parentElement.parentElement.id ? item.title = this.state.updateInputValue : item
                 })});
                 this.setState({updateInputValue: "", oneClickEdit: !this.state.oneClickEdit});
             })
@@ -147,7 +163,7 @@ class ToDoList extends Component{
                     {this.state.todos.map((item, index)=>{
                         return(
                            <li key={index} id={item.id} className="todosList">
-                           <input onClick={this.completeItem} type='checkbox'/>
+                           <input onClick={this.completeItem} type='checkbox' checked={item.completed}/>
 
                            <input type="text" defaultValue={item.title} className="todoItems" readOnly={true} onChange={this.handleUpdate} style={{textDecoration: item.completed ? "line-through" : "none"}}/> 
 
