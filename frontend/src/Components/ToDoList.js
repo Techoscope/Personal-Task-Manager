@@ -128,7 +128,7 @@ class ToDoList extends Component{
             .then( res => console.log(res.data) )
             .then(()=>{
                 this.setState({...this.state, todos: this.state.todos.filter(item => {
-                    return item.id === e.target.parentElement.parentElement.id ? item.title = this.state.updateInputValue : item
+                    return item.id == e.target.parentElement.parentElement.id ? item.title = this.state.updateInputValue : item
                 })});
                 this.setState({updateInputValue: "", oneClickEdit: !this.state.oneClickEdit});
             })
