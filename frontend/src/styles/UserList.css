@@ -1,15 +1,40 @@
 .usersTable{
-    margin-left: 2%;  
+    margin-left: 3%;  
 }
 .usersTable th{
     text-align:initial;
+    font-size: 22px;
 }
 .userForm{
     margin-left: 2%;
 }
 .addUserBtn{
-    margin-left: 2%; 
+    margin-left: 3%; 
 }
 .allUsers{
-    margin-left: 1%;  
+    margin: 1% 3%;
+}
+.addInputs{
+    margin: 1% 1% 1% 0;
+    padding: 0.25% 0.75%;
+    width: 150px;
+}
+.addUserButtons{
+    font-size: 20px;
+    padding: 1%;
+}
+
+.highlightTDs td input{
+    background-color: rgb(64, 187, 187);
+}
+
+.userInfos{
+    /* border: none; */
+    
+    margin-top: 4%;
+    outline: none;
+    padding: 2%;
+    border-radius: 0.25rem;
+    font-size: 15px;
+    font-family: 'Roboto Mono', monospace;
 }

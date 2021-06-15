@@ -104,7 +104,7 @@ import AlbumForm from './AlbumForm';
         
         return (
             <div>
-             <h2>Albums List</h2>
+             <h1>Albums List</h1>
              <button onClick={this.showFormFunc} id="addButtonAlbums">ADD ALBUMS</button>
              {this.state.showForm?  <AlbumForm showFormFunc={this.showFormFunc} addAlbums={this.addAlbums}/> : '' }
              

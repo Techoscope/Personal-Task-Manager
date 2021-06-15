@@ -15,7 +15,8 @@ export default function AlbumForm(props) {
             axios.post('https://jsonplaceholder.typicode.com/albums', {title:album})
             .then(response => {
                 console.log(response.data)
-                props.addAlbums(response.data) ; setAlbum('');
+                props.addAlbums(response.data);
+                setAlbum('');
 
                 e.target.nextElementSibling.style.display = "inline-block";
                 e.target.previousElementSibling.previousElementSibling.style.display = "none"

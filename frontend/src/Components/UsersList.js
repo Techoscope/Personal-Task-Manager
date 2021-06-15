@@ -46,7 +46,7 @@ class UsersList extends Component {
   handleUpdate =(e)=>{this.setState({[e.target.name] : e.target.value})}
 
   saveChanges=(e)=>{
-
+    console.log(e)
     this.setState({editClick:true})
     e.target.parentElement.parentElement.classList.remove("highlightTDs")
     for(let i=0; i<4; i++){
@@ -112,10 +112,10 @@ class UsersList extends Component {
     if(this.state.users.length){
       return (
         <div className="userListing">
-          <h2 className="allUsers">All Users List</h2>
+          <h1 className="allUsers">All Users List</h1>
           <button onClick={this.handleClick} className="addUserBtn">Add User</button>
           <div className="userForm">
-            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser} /> : null}
+            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser} /> : ""}
           </div>
           <table width="100%" className="usersTable">
             <thead>
@@ -130,15 +130,14 @@ class UsersList extends Component {
             { this.state.users.map(user =>{
                     return (
                         <tr key ={user.id} id={user.id} >
-                          <td><input type ="text" defaultValue={user.name} name ="name" onChange ={this.handleUpdate} className="name" disabled={true}/></td>
-                          <td><input type ="text" defaultValue={user.username} name ="username" onChange ={this.handleUpdate} className="username" disabled={true}/></td>
-                          <td><input type ="text" defaultValue={user.email} name ="email" onChange ={this.handleUpdate} className="email" disabled={true}/></td>
-                          <td><input type ="text" defaultValue={user.phone} name ="phone" onChange ={this.handleUpdate} className="phone" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.name} name ="name" onChange ={this.handleUpdate} className="name userInfos" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.username} name ="username" onChange ={this.handleUpdate} className="username userInfos" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.email} name ="email" onChange ={this.handleUpdate} className="email userInfos" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.phone} name ="phone" onChange ={this.handleUpdate} className="phone userInfos" disabled={true}/></td>
+                      {this.state.editClick ?
+                      <td ><span onClick={this.editUser} style={{color:'green'}}>edit</span>/<span onClick ={this.deleteUser}>delete</span></td>:''}
 
-                       {this.state.editClick ?
-                       <td ><span onClick={this.editUser} style={{color:'green'}}>edit</span> <span onClick ={this.deleteUser}>delete</span></td>:''}
-                       <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span> <span onClick ={this.cancelChanges} style={{color:'firebrick'}}>cancel</span></td>
-                      
+                      <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span>/<span onClick ={this.cancelChanges} style={{color:'firebrick'}}>cancel</span></td> 
                     </tr>)
                     })}
             </tbody>
