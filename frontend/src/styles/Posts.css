@@ -3,7 +3,14 @@
     margin:0;
     padding: 0;
 }
-
+.postContainer{
+    margin-left: 32px;
+    margin-right: 32px;
+    
+}
+.postTitle{
+    padding: 1%;
+}
 .postItems{
     margin-left: 32px;
     margin-right: 32px;
@@ -11,41 +18,77 @@
 }
 #createPostBtn{
     margin-left: 3%;
+    margin-bottom: 0.5%;
+    padding: 0.25% 0.75%;
     background-color:hotpink;
     color:white;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    
+    text-align: center; 
+}
+#createPostBtn:hover{cursor: pointer;}
+
+#titleInput {
+    margin-left: 3%;
+    width: 300px;
+    height: 30px;
 }
 
-#inputTitle {
-    width: 250px;
-    height: 25px;
+#bodyInput {
+    width: 300px;
+    height: 70px;
     margin-left: 3%;
+}
+#cancelPostButton{
+    margin-top: 1%;
+    margin-left: 3%;
+    background-color: red;
+    color: white;
+    padding: 0.5% 1%;
+    width: 80px;
+}
+#cancelPostButton:hover{
+    cursor: pointer;
+}
+#savePostButton{
+    margin: 1% 1% 0 1%;
+    background-color: green;
+    color: white;
+    padding: 0.5% 1%;
+    width: 80px;
+}
+#savePostButton:hover{
+    cursor: pointer;
 }
 
-#inputPost {
-    width: 250px;
-    height: 75px;
-    margin-left: 3%;
+#postsForm input{
+    margin: 0.5% 0.5% 0.5% 3%;
 }
-#cancelPost{
-    background-color: rgb(224, 7, 7);
-    color: white;
-    padding: 0.5% 1%;
-    width: 75px;
-    margin-top: 1%;
-    margin-left: 3%;
+.trashPostIcons{
+    margin-left: 1%;
+    font-size:large;
+    color: red;
+    float: right;
 }
-#savePost{
-    background-color: rgb(6, 153, 6);
-    color: white;
-    padding: 0.5% 1%;
-    width: 75px;
-    margin-top: 1%;
-    margin-left: 3%;
+.trashPostIcons:hover{
+    cursor: pointer;
 }
+.editPostIcons {
+    margin-left: 1%;
+    font-size:large;
+    float: right;
+    color: blue;
+}
+
+.editPostIcons:hover{
+    cursor: pointer;
+}
+.postBody{
+    padding: 1%;
+}
+
+
+/* -------------------- */
 #editSpan{
     font-size: 15px;
     float: right;

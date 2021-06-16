@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 import '../styles/Albums.css'
 import AlbumForm from './AlbumForm';
 
@@ -27,41 +28,100 @@ import AlbumForm from './AlbumForm';
     }
 
     addAlbums =(param)=>{
-        console.log(param)
+
         this.setState({
             albums:[...this.state.albums, param]
-
-
         })
-
-   
-        
-
     }
 
     getAlbums = () => {
         fetch('https://jsonplaceholder.typicode.com/albums')
-  .then(response => response.json())
-  .then(json => {
-    //   console.log(json)
-      return this.setState({albums: json})
-  }
-    )
+        .then(response => response.json())
+        .then(json => {
+        //   console.log(json)
+        return this.setState({albums: json})
+        })
+    }
+    editFunc = (e) => {
+        e.target.parentElement.style.display = "none"
+        e.target.parentElement.nextElementSibling.nextElementSibling.style.display = "block";
+        e.target.parentElement.nextElementSibling.contentEditable = true;
+        e.target.parentElement.nextElementSibling.classList.add("highlightInputs")
+        //console.log(e)
+    }
+    deleteAlbum = (e) => {
+        const data = {
+            method: 'DELETE',
+        }
+        
+        fetch('https://jsonplaceholder.typicode.com/albums/' + e.target.parentElement.parentElement.id, data)
+        .then(response => response.json())
+        .then(jsonResponse => console.log(jsonResponse))
+        e.target.parentElement.parentElement.remove();
+
+        this.setState({oneClicked: !this.state.oneClicked});
+    }
+    showButtons = (e)=> {
+        if(!this.state.oneClicked){
+            e.target.previousElementSibling.style.display = "block";
+            this.setState({oneClicked: !this.state.oneClicked});
+            
+            //console.log(e)
+        }
+    }
+    saveChanges = (e) => {
+        
+        const updateInputValue = e.target.parentElement.previousElementSibling.innerHTML
+       
+        axios.put("https://jsonplaceholder.typicode.com/albums/" + e.target.parentElement.parentElement.id, { title: updateInputValue})
+        .then( res => console.log(res.data) )
+        .then(()=>{
+            
+            this.setState({...this.state, albums: this.state.albums.filter(item => {
+                return item.id == e.target.parentElement.parentElement.id ? item.title = updateInputValue : item
+            })});
+           
+        })
+        .catch(err=>{console.log(err)});
+
+        e.target.parentElement.previousElementSibling.contentEditable = false;
+        e.target.parentElement.previousElementSibling.classList.remove("highlightInputs");
+        e.target.parentElement.style.display = "none";
+        this.setState({oneClicked: !this.state.oneClicked});
+    }
+    cancelChanges = (e) => {
+        
+        e.target.parentElement.previousElementSibling.innerHTML = this.state.albums[e.target.id].title; 
+        e.target.parentElement.previousElementSibling.contentEditable = false;
+        e.target.parentElement.previousElementSibling.classList.remove("highlightInputs");
+        e.target.parentElement.style.display = "none";
+        this.setState({oneClicked: !this.state.oneClicked});
     }
 
     render() {
         
         return (
             <div>
-             <h2>Albums List</h2>
-             <button onClick={this.showFormFunc}>ADD ALBUMS</button>
+             <h1>Albums List</h1>
+             <button onClick={this.showFormFunc} id="addButtonAlbums">ADD ALBUMS</button>
              {this.state.showForm?  <AlbumForm showFormFunc={this.showFormFunc} addAlbums={this.addAlbums}/> : '' }
              
              <div className='album-container'>
              {this.state.albums.map((item,index) => {
-                 return <a href= '#' className='container' key={index}>
-                     {item.title}
-                 </a>
+                 return (
+                    <div className='container' key={index} id={item.id}>
+                    <div className="albumBothButtons">
+                        <span className="editAlbumBtn" onClick={this.editFunc}>Edit </span>|
+                        <span className="deleteAlbumBtn" onClick={this.deleteAlbum}> Delete</span>
+                    </div>
+                    
+                    <span className="albumItem" onClick={this.showButtons} contentEditable={false}>{item.title}</span>
+                    <div className="secondAlbumButtons">
+                        <button className="saveAlbumChanges" onClick={this.saveChanges}>Save</button>
+                        <button className="cancelAlbumChanges" onClick={this.cancelChanges} id={index}>Cancel</button>
+                    </div>
+                </div>
+                 )
              })}
              </div>
             
@@ -69,8 +129,8 @@ import AlbumForm from './AlbumForm';
             </div>
         )
          
+    }
 }
- }
     
 
 

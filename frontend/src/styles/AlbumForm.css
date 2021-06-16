@@ -1,0 +1,38 @@
+#albumInput{
+    padding: 0.5% 2%;
+    margin: 1% 1% 1% 3%;
+    width: 200px;
+  }
+  
+  #albumRequire{
+    font-size: 14px;
+    color: red;
+    margin-right: 2%;
+    display: none;
+  }
+  
+  .cancelAlbumAdd{
+    font-size: 40px;
+    color: red;
+    margin-right: 1%;
+    margin-left: 2%;
+    position: relative;
+    top: 10px;
+    
+  }
+  .cancelAlbumAdd:hover{cursor: pointer;}
+  .approveAlbumAdd{
+    font-size: 40px;
+    color: green;
+    position: relative;
+    top:10px;
+  }
+  .approveAlbumAdd:hover{cursor: pointer;}
+  
+  #albumSuccesful{
+    margin-left: 1%;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(86, 192, 72);
+    display: none;
+  }

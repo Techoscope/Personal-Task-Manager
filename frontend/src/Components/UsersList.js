@@ -46,7 +46,7 @@ class UsersList extends Component {
   handleUpdate =(e)=>{this.setState({[e.target.name] : e.target.value})}
 
   saveChanges=(e)=>{
-
+    
     this.setState({editClick:true})
     e.target.parentElement.parentElement.classList.remove("highlightTDs")
     for(let i=0; i<4; i++){
@@ -56,7 +56,8 @@ class UsersList extends Component {
 
     let item ={}
     if(this.state.name !=="" || this.state.username !=="" || this.state.email !=="" || this.state.phone !==""){
-      item = {name: this.state.name,username: this.state.username,email: this.state.email,phone: this.state.phone}
+      item = {name: this.state.name,username: this.state.username,email: this.state.email,phone: this.state.phone};
+      this.setState({ name : "" , username: "", email: "", phone: ""})
     }
     if(item.name === ''){delete item.name}
     if(item.username === ''){delete item.username}
@@ -65,6 +66,7 @@ class UsersList extends Component {
 
     axios.put('https://jsonplaceholder.typicode.com/users/' + e.target.parentElement.parentElement.id, item)
     .then(res =>{
+      console.log(res.data)
       if((res.data.name)){this.setState({...this.state, users:this.state.users.filter((item)=>{
         return item.id == e.target.parentElement.parentElement.id ? item.name = res.data.name : item
       })})}
@@ -96,13 +98,13 @@ class UsersList extends Component {
     e.target.parentElement.parentElement.children[4].style.display='none';
     
   if(this.state.name !=="" || this.state.username !=="" || this.state.email !=="" || this.state.phone !=="" ){
-    e.target.parentElement.parentElement.children[0].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].name
+    e.target.parentElement.parentElement.children[0].children[0].value = this.state.users[e.target.id].name
     //console.log(e.target.parentElement.parentElement.id)
-    e.target.parentElement.parentElement.children[1].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].username
+    e.target.parentElement.parentElement.children[1].children[0].value = this.state.users[e.target.id].username
 
-    e.target.parentElement.parentElement.children[2].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].email
+    e.target.parentElement.parentElement.children[2].children[0].value = this.state.users[e.target.id].email
 
-    e.target.parentElement.parentElement.children[3].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].phone
+    e.target.parentElement.parentElement.children[3].children[0].value = this.state.users[e.target.id].phone
   }
   this.setState({name:"", username:"",email:"", phone:""})
   
@@ -112,10 +114,10 @@ class UsersList extends Component {
     if(this.state.users.length){
       return (
         <div className="userListing">
-          <h2 className="allUsers">All Users List</h2>
+          <h1 className="allUsers">All Users List</h1>
           <button onClick={this.handleClick} className="addUserBtn">Add User</button>
           <div className="userForm">
-            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser} /> : null}
+            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser} /> : ""}
           </div>
           <table width="100%" className="usersTable">
             <thead>
@@ -127,18 +129,17 @@ class UsersList extends Component {
               </tr>
             </thead>
             <tbody>
-            { this.state.users.map(user =>{
+            { this.state.users.map((user,index) =>{
                     return (
                         <tr key ={user.id} id={user.id} >
-                          <td><input type ="text" defaultValue={user.name} name ="name" onChange ={this.handleUpdate} className="name" disabled={true}/></td>
-                          <td><input type ="text" defaultValue={user.username} name ="username" onChange ={this.handleUpdate} className="username" disabled={true}/></td>
-                          <td><input type ="text" defaultValue={user.email} name ="email" onChange ={this.handleUpdate} className="email" disabled={true}/></td>
-                          <td><input type ="text" defaultValue={user.phone} name ="phone" onChange ={this.handleUpdate} className="phone" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.name} name ="name" onChange ={this.handleUpdate} className="name userInfos" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.username} name ="username" onChange ={this.handleUpdate} className="username userInfos" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.email} name ="email" onChange ={this.handleUpdate} className="email userInfos" disabled={true}/></td>
+                          <td><input type ="text" defaultValue={user.phone} name ="phone" onChange ={this.handleUpdate} className="phone userInfos" disabled={true}/></td>
+                      {this.state.editClick ?
+                      <td ><span onClick={this.editUser} style={{color:'green'}}>edit</span>/<span onClick ={this.deleteUser} style={{color:'red'}}>delete</span></td>:''}
 
-                       {this.state.editClick ?
-                       <td ><span onClick={this.editUser} style={{color:'green'}}>edit</span> <span onClick ={this.deleteUser}>delete</span></td>:''}
-                       <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span> <span onClick ={this.cancelChanges} style={{color:'firebrick'}}>cancel</span></td>
-                      
+                      <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span>/<span onClick ={this.cancelChanges} style={{color:'firebrick'}} id={index}>cancel</span></td> 
                     </tr>)
                     })}
             </tbody>
