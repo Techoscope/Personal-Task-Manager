@@ -107,7 +107,7 @@ class ToDoList extends Component{
         //console.log(e.target.parentElement.previousElementSibling.previousElementSibling)
 
         if(this.state.updateInputValue !== ""){
-            e.target.parentElement.previousElementSibling.previousElementSibling.value = this.state.todos[e.target.parentElement.parentElement.id-1].title;
+            e.target.parentElement.previousElementSibling.previousElementSibling.value = this.state.todos[e.target.id].title;
         }
         
 
@@ -122,13 +122,13 @@ class ToDoList extends Component{
     }
 
     saveChanges = (e) => {
-        const parentID = parseInt(e.target.parentElement.parentElement.id);
+        const parentID = e.target.parentElement.parentElement.id;
         if(this.state.updateInputValue !== ""){
-            axios.put("https://jsonplaceholder.typicode.com/todos/" + e.target.parentElement.parentElement.id, { title: this.state.updateInputValue})
+            axios.put("https://jsonplaceholder.typicode.com/todos/" + parentID, { title: this.state.updateInputValue})
             .then( res => console.log(res.data) )
             .then(()=>{
                 this.setState({...this.state, todos: this.state.todos.filter(item => {
-                    return item.id == e.target.parentElement.parentElement.id ? item.title = this.state.updateInputValue : item
+                    return item.id === parentID ? item.title = this.state.updateInputValue : item
                 })});
                 this.setState({updateInputValue: "", oneClickEdit: !this.state.oneClickEdit});
             })
@@ -174,7 +174,7 @@ class ToDoList extends Component{
 
                             <span className="iconsToEdit">
                                 <i className="far fa-check-circle checkIcons" onClick={this.saveChanges}></i>
-                                <i className="fas fa-times-circle cancelIcons" onClick={this.cancelChanges}></i>
+                                <i className="fas fa-times-circle cancelIcons" onClick={this.cancelChanges} id={index}></i>
                             </span>
 
                            

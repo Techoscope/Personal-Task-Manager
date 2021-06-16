@@ -98,13 +98,13 @@ class UsersList extends Component {
     e.target.parentElement.parentElement.children[4].style.display='none';
     
   if(this.state.name !=="" || this.state.username !=="" || this.state.email !=="" || this.state.phone !=="" ){
-    e.target.parentElement.parentElement.children[0].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].name
+    e.target.parentElement.parentElement.children[0].children[0].value = this.state.users[e.target.id].name
     //console.log(e.target.parentElement.parentElement.id)
-    e.target.parentElement.parentElement.children[1].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].username
+    e.target.parentElement.parentElement.children[1].children[0].value = this.state.users[e.target.id].username
 
-    e.target.parentElement.parentElement.children[2].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].email
+    e.target.parentElement.parentElement.children[2].children[0].value = this.state.users[e.target.id].email
 
-    e.target.parentElement.parentElement.children[3].children[0].value = this.state.users[e.target.parentElement.parentElement.id -1].phone
+    e.target.parentElement.parentElement.children[3].children[0].value = this.state.users[e.target.id].phone
   }
   this.setState({name:"", username:"",email:"", phone:""})
   
@@ -129,7 +129,7 @@ class UsersList extends Component {
               </tr>
             </thead>
             <tbody>
-            { this.state.users.map(user =>{
+            { this.state.users.map((user,index) =>{
                     return (
                         <tr key ={user.id} id={user.id} >
                           <td><input type ="text" defaultValue={user.name} name ="name" onChange ={this.handleUpdate} className="name userInfos" disabled={true}/></td>
@@ -139,7 +139,7 @@ class UsersList extends Component {
                       {this.state.editClick ?
                       <td ><span onClick={this.editUser} style={{color:'green'}}>edit</span>/<span onClick ={this.deleteUser} style={{color:'red'}}>delete</span></td>:''}
 
-                      <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span>/<span onClick ={this.cancelChanges} style={{color:'firebrick'}}>cancel</span></td> 
+                      <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span>/<span onClick ={this.cancelChanges} style={{color:'firebrick'}} id={index}>cancel</span></td> 
                     </tr>)
                     })}
             </tbody>

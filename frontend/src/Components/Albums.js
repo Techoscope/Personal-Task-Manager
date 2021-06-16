@@ -72,14 +72,13 @@ import AlbumForm from './AlbumForm';
     saveChanges = (e) => {
         
         const updateInputValue = e.target.parentElement.previousElementSibling.innerHTML
-        const parentID = parseInt(e.target.parentElement.parentElement.id);
        
-        axios.put("https://jsonplaceholder.typicode.com/albums/" + parentID, { title: updateInputValue})
+        axios.put("https://jsonplaceholder.typicode.com/albums/" + e.target.parentElement.parentElement.id, { title: updateInputValue})
         .then( res => console.log(res.data) )
         .then(()=>{
             
             this.setState({...this.state, albums: this.state.albums.filter(item => {
-                return item.id === parentID ? item.title = updateInputValue : item
+                return item.id == e.target.parentElement.parentElement.id ? item.title = updateInputValue : item
             })});
            
         })
@@ -92,8 +91,7 @@ import AlbumForm from './AlbumForm';
     }
     cancelChanges = (e) => {
         
-        const indexNumber = e.target.parentElement.parentElement.id;
-        e.target.parentElement.previousElementSibling.innerHTML = this.state.albums[indexNumber - 1].title; 
+        e.target.parentElement.previousElementSibling.innerHTML = this.state.albums[e.target.id].title; 
         e.target.parentElement.previousElementSibling.contentEditable = false;
         e.target.parentElement.previousElementSibling.classList.remove("highlightInputs");
         e.target.parentElement.style.display = "none";
@@ -120,7 +118,7 @@ import AlbumForm from './AlbumForm';
                     <span className="albumItem" onClick={this.showButtons} contentEditable={false}>{item.title}</span>
                     <div className="secondAlbumButtons">
                         <button className="saveAlbumChanges" onClick={this.saveChanges}>Save</button>
-                        <button className="cancelAlbumChanges" onClick={this.cancelChanges}>Cancel</button>
+                        <button className="cancelAlbumChanges" onClick={this.cancelChanges} id={index}>Cancel</button>
                     </div>
                 </div>
                  )
