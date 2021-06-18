@@ -73,19 +73,19 @@ class UsersList extends Component {
     .then(res =>{
       console.log(res.data)
       if((res.data.name)){this.setState({...this.state, users:this.state.users.filter((item)=>{
-        return item.id == e.target.parentElement.parentElement.id ? item.name = res.data.name : item
+        return item.id === e.target.parentElement.parentElement.id ? item.name = res.data.name : item
       })})}
 
       if((res.data.username)){this.setState({...this.state, users:this.state.users.filter((item)=>{
-        return item.id == e.target.parentElement.parentElement.id ? item.username = res.data.username : item
+        return item.id === e.target.parentElement.parentElement.id ? item.username = res.data.username : item
       })})}
 
       if((res.data.email)){this.setState({...this.state, users:this.state.users.filter((item)=>{
-        return item.id == e.target.parentElement.parentElement.id ? item.email = res.data.email : item
+        return item.id === e.target.parentElement.parentElement.id ? item.email = res.data.email : item
       })})}
 
       if((res.data.phone)){this.setState({...this.state, users:this.state.users.filter((item)=>{
-        return item.id == e.target.parentElement.parentElement.id ? item.phone = res.data.phone : item
+        return item.id === e.target.parentElement.parentElement.id ? item.phone = res.data.phone : item
       })})}
 
     })

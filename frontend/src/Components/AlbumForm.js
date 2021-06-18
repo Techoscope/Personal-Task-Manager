@@ -12,7 +12,7 @@ export default function AlbumForm(props) {
 
     const approveAddAlbum=(e)=>{
         if(album !== ""){
-            axios.post('https://jsonplaceholder.typicode.com/albums', {title:album})
+            axios.post('http://localhost:8080/api/albums', {title:album})
             .then(response => {
                 console.log(response.data)
                 props.addAlbums(response.data);
