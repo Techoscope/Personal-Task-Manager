@@ -60,7 +60,8 @@ class ToDoList extends Component{
         .then(response => response.json())
         .then(jsonResponse => {
             console.log(jsonResponse)
-            e.target.parentElement.parentElement.remove();
+            //e.target.parentElement.parentElement.remove();
+            this.toDosFetch()
         })
         
 
@@ -154,7 +155,7 @@ class ToDoList extends Component{
     render() {
         return (
             <div>
-                <label style={{fontSize: "25px", fontWeight:"bold"}}>To Do List</label>
+                <label style={{fontSize: "28px", fontWeight:"bold"}}>To Do List</label>
                 <br/>
                 <input name="input" id="todo_input" value={this.state.input} onChange={this.handleChange} placeholder="Enter your item!"></input>
                 <span id="usernameRequire" className="requires">*required</span>
