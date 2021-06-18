@@ -17,7 +17,7 @@ export default class Form extends Component {
     
     handleSubmit = () => {
         if(this.state.name!=="" && this.state.username!=="" && this.state.email!=="" && this.state.phone!==""){
-            axios.post("https://jsonplaceholder.typicode.com/users", this.state)
+            axios.post("http://localhost:8080/api/users", this.state)
             .then(resp=>{
                 console.log(resp.data);
                 this.props.addUser(resp.data);

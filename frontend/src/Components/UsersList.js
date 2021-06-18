@@ -27,11 +27,16 @@ class UsersList extends Component {
   }
 
   deleteUser = (e)=>{
-    fetch('https://jsonplaceholder.typicode.com/users/' + e.target.parentElement.parentElement.id,{
+    fetch('http://localhost:8080/api/users/' + e.target.parentElement.parentElement.id,{
       method:'DELETE'
     })
-    e.target.parentElement.parentElement.remove();
-    console.log(e.target.parentElement.parentElement.id);
+    .then(data=>data.json())
+    .then(jsonResponse=>{
+      console.log(jsonResponse);
+      e.target.parentElement.parentElement.remove();
+    })
+    
+    //console.log(e.target.parentElement.parentElement.id);
   }
 
   editUser = (e)=>{
@@ -64,7 +69,7 @@ class UsersList extends Component {
     if(item.email === ''){delete item.email}
     if(item.phone === ''){delete item.phone}
 
-    axios.put('https://jsonplaceholder.typicode.com/users/' + e.target.parentElement.parentElement.id, item)
+    axios.put('http://localhost:8080/api/users/' + e.target.parentElement.parentElement.id, item)
     .then(res =>{
       console.log(res.data)
       if((res.data.name)){this.setState({...this.state, users:this.state.users.filter((item)=>{
@@ -138,20 +143,30 @@ class UsersList extends Component {
                           <td><input type ="text" defaultValue={user.phone} name ="phone" onChange ={this.handleUpdate} className="phone userInfos" disabled={true}/></td>
                       {this.state.editClick ?
                       <td ><span onClick={this.editUser} style={{color:'green'}}>edit</span>/<span onClick ={this.deleteUser} style={{color:'red'}}>delete</span></td>:''}
-
-                      <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span>/<span onClick ={this.cancelChanges} style={{color:'firebrick'}} id={index}>cancel</span></td> 
-                    </tr>)
+                      <td style={{display:'none'}}><span onClick={this.saveChanges} style={{color:'blue'}}>save</span>/<span onClick ={this.cancelChanges} style={{color:'firebrick'}} id={index}>cancel</span></td>
+                      </tr>)
                     })}
             </tbody>
           </table>
         </div>
       )
+    } else {
+      return (
+        <div>
+          <div style={{margin: "3%"}}>There is no users exist</div>
+          <div>
+            <button onClick={this.handleClick} className="addUserBtn">Add User</button>
+            {this.state.clicked ? <Form handleClick={this.handleClick} addUser={this.addUser} /> : ""}
+          </div>
+        </div>
+      )
+      
     }
-    return <div>There is no users exist</div>
+    
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('http://localhost:8080/api/users')
       .then(response => response.json())
       .then(json => {
         this.setState({

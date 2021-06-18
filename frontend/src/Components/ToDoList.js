@@ -56,7 +56,7 @@ class ToDoList extends Component{
             method: 'DELETE',
         }
         
-        fetch('https://jsonplaceholder.typicode.com/todos/' + e.target.parentElement.parentElement.id, data)
+        fetch('http://localhost:8080/api/todos/' + e.target.parentElement.parentElement.id, data)
         .then(response => response.json())
         .then(jsonResponse => {
             console.log(jsonResponse)
@@ -72,14 +72,16 @@ class ToDoList extends Component{
             axios.put("http://localhost:8080/api/todos/" + e.target.parentElement.id, {completed: e.target.checked})
             .then(res => {
                 console.log(res.data);
-                e.target.checked = true;
+                //e.target.checked = true;
+                this.toDosFetch()
                 e.target.parentElement.querySelector(".todoItems").style.textDecoration = e.target.checked ? 'line-through' : 'none';
             })
         } else {
             axios.put("http://localhost:8080/api/todos/" + e.target.parentElement.id, {completed: e.target.checked})
             .then(res => {
                 console.log(res.data);
-                e.target.checked = false;
+                //e.target.checked = false;
+                this.toDosFetch()
                 e.target.parentElement.querySelector(".todoItems").style.textDecoration = e.target.checked ? 'line-through' : 'none';
             })
         }
@@ -124,7 +126,7 @@ class ToDoList extends Component{
     saveChanges = (e) => {
         const parentID = e.target.parentElement.parentElement.id;
         if(this.state.updateInputValue !== ""){
-            axios.put("https://jsonplaceholder.typicode.com/todos/" + parentID, { title: this.state.updateInputValue})
+            axios.put("http://localhost:8080/api/todos/" + parentID, { title: this.state.updateInputValue})
             .then( res => console.log(res.data) )
             .then(()=>{
                 this.setState({...this.state, todos: this.state.todos.filter(item => {
@@ -163,7 +165,7 @@ class ToDoList extends Component{
                     {this.state.todos.map((item, index)=>{
                         return(
                            <li key={index} id={item.id} className="todosList">
-                           <input onClick={this.completeItem} type='checkbox' checked={item.completed}/>
+                           <input onChange={this.completeItem} type='checkbox' checked={item.completed}/>
 
                            <input type="text" defaultValue={item.title} className="todoItems" readOnly={true} onChange={this.handleUpdate} style={{textDecoration: item.completed ? "line-through" : "none"}}/> 
 
