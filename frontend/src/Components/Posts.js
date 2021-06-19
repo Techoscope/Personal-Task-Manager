@@ -19,7 +19,7 @@ export default class Posts extends Component {
     }
 
     fetchPosts = () => {
-        fetch("https://jsonplaceholder.typicode.com/posts")
+        fetch("http://localhost:8080/api/posts")
         .then(res => res.json())
         .then(jsonResponse => {
             this.setState({
@@ -30,19 +30,22 @@ export default class Posts extends Component {
     componentDidMount(){
         this.fetchPosts()
     }
-     handleInput = (e) => {
- this.setState({[e.target.name]:e.target.value})
-     }
+    componentDidUpdate(){
+        this.fetchPosts()
+    }
+    handleInput = (e) => {
+        this.setState({[e.target.name]:e.target.value})
+    }
     removePost = (e) => {
         const data = {
             method: "DELETE"
         }
 
-        fetch("https://jsonplaceholder.typicode.com/posts/" + e.target.parentElement.parentElement.id, data)
+        fetch("http://localhost:8080/api/posts/" + e.target.parentElement.parentElement.id, data)
         .then(res => res.json())
         .then(jsonRes => {
             console.log(jsonRes);
-            e.target.parentElement.parentElement.remove(); 
+            //e.target.parentElement.parentElement.remove(); 
         })
         
     }
@@ -73,11 +76,11 @@ export default class Posts extends Component {
         } else if(item.body === ""){
             this.bodyRef.current.style.display = "inline-block";
         } else {
-            axios.post("https://jsonplaceholder.typicode.com/posts", item)
+            axios.post("http://localhost:8080/api/posts", item)
             .then(res => {
                 console.log(res.data);
                 //dispatch({type: "addPost", payload: res.data});
-                this.setState({posts: [...this.state.posts, res.data], input: "", body:""});
+                this.setState({posts: [...this.state.posts, res.data], title: "", body:""});
                 this.titleRef.current.style.display = "none"
                 this.bodyRef.current.style.display = "none";
                 this.succesfulRef.current.style.display = "inline-block";

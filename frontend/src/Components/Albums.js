@@ -35,7 +35,7 @@ import AlbumForm from './AlbumForm';
     }
 
     getAlbums = () => {
-        fetch('https://jsonplaceholder.typicode.com/albums')
+        fetch('http://localhost:8080/api/albums')
         .then(response => response.json())
         .then(json => {
         //   console.log(json)
@@ -54,7 +54,7 @@ import AlbumForm from './AlbumForm';
             method: 'DELETE',
         }
         
-        fetch('https://jsonplaceholder.typicode.com/albums/' + e.target.parentElement.parentElement.id, data)
+        fetch('http://localhost:8080/api/albums/' + e.target.parentElement.parentElement.id, data)
         .then(response => response.json())
         .then(jsonResponse => console.log(jsonResponse))
         e.target.parentElement.parentElement.remove();
@@ -73,12 +73,12 @@ import AlbumForm from './AlbumForm';
         
         const updateInputValue = e.target.parentElement.previousElementSibling.innerHTML
        
-        axios.put("https://jsonplaceholder.typicode.com/albums/" + e.target.parentElement.parentElement.id, { title: updateInputValue})
+        axios.put("http://localhost:8080/api/albums/" + e.target.parentElement.parentElement.id, { title: updateInputValue})
         .then( res => console.log(res.data) )
         .then(()=>{
             
             this.setState({...this.state, albums: this.state.albums.filter(item => {
-                return item.id == e.target.parentElement.parentElement.id ? item.title = updateInputValue : item
+                return item.id === e.target.parentElement.parentElement.id ? item.title = updateInputValue : item
             })});
            
         })
@@ -102,7 +102,7 @@ import AlbumForm from './AlbumForm';
         
         return (
             <div>
-             <h1>Albums List</h1>
+             <h1 style={{marginLeft: "3%",marginTop: "1%"}}>Albums List</h1>
              <button onClick={this.showFormFunc} id="addButtonAlbums">ADD ALBUMS</button>
              {this.state.showForm?  <AlbumForm showFormFunc={this.showFormFunc} addAlbums={this.addAlbums}/> : '' }
              

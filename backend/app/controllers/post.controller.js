@@ -1,58 +1,72 @@
 const db = require("../models");
-const Todo = db.todos;
+const Post = db.posts;
 
-// Create and Save a new Todo Item
+
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
-  // Create a Todo Item
-  const todo = new Todo({
+ 
+  const post = new Post({
     title: req.body.title,
-    completed: false
+    body: req.body.body,
   });
 
-  // Save Tutorial in the database
-  todo
-    .save(todo)
+  
+  post
+    .save(post)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Todo Item."
+          err.message || "Some error occurred while creating the Post."
       });
     });
 };
 
-// Retrieve all Todo Items from the database.
+
 exports.findAll = (req, res) => {
   // const title = req.query.title;
   // var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
   var condition = {};
 
-  Todo.find(condition)
+  Post.find(condition)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving todo items."
+          err.message || "Some error occurred while retrieving posts."
       });
     });
 };
 
-// Find a single Todo Item with an id
+
 exports.findOne = (req, res) => {
-  
+  const id = req.params.id;
+  Post.findById(id)
+  .then(data=>{
+      if(!data){
+          res.status(404).send({
+              message: `Error occurred while finding post with id= ${id}.`
+          })
+      } else {res.send(data)}
+  })
+  .catch(err=>{
+      res.status(500).send({
+          message: 
+          err.message || "Cannot access the data"
+      })
+  })
 };
 
-// Update a Todo Item by the id in the request
+
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -62,35 +76,35 @@ exports.update = (req, res) => {
 
   const id = req.params.id;
 
-  Todo.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  Post.findByIdAndUpdate(id, req.body, {new:true, useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Cannot update Post with id=${id}. Maybe Post was not found!`
         });
-      } else res.send({ message: "Tutorial was updated successfully." });
+      } else res.send(data);
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + id
+        message: "Error updating Post with id=" + id
       });
     });
 };
 
-// Delete a Todo Item with the specified id in the request
+
 exports.delete = (req, res) => {
   const id = req.params.id;
-  Todo.findByIdAndRemove(id)
+  Post.findByIdAndRemove(id, {useFindAndModify: false, new: true})
   .then(data => {
     if (!data) {
       res.status(404).send({
-        message: `Cannot delete Todo Item with id=${id}. Maybe item was not found!`
+        message: `Cannot delete post with id=${id}. Maybe post was not found!`
       });
-    } else res.send({ message: "Todo Item was deleted successfully." });
+    } else res.send({ message: "User was deleted successfully." });
   })
   .catch(err => {
     res.status(500).send({
-      message: "Error deleting Todo item with id=" + id
+      message: "Error deleting Post with id=" + id
     });
   });
 };

@@ -26,19 +26,18 @@ export default function EditPost(props) {
 
 
     useEffect(() => {
-        fetch("https://jsonplaceholder.typicode.com/posts/" + id)
+        fetch("http://localhost:8080/api/posts/" + id)
             .then(res => res.json())
             .then(jsonResponse => {
                 dispatch({type: "postForEdit", payload: jsonResponse})
+                console.log(jsonResponse)
             })
         //console.log(state)
     }, [])
    
-    const cancelPostEdit = () => {
-        
-    }
+    
     const editPostFunc = () => {
-
+        
         let item={};
 
         if(state.titleEdit !== "" || state.bodyEdit !== ""){
@@ -51,7 +50,7 @@ export default function EditPost(props) {
 
         if(item.title || item.body){
 
-            axios.put("https://jsonplaceholder.typicode.com/posts/" + id, item )
+            axios.put("http://localhost:8080/api/posts/" + id, item )
                 .then((res)=>{
                 console.log(res.data)
             })
@@ -62,7 +61,7 @@ export default function EditPost(props) {
     }
 
     const handleChange = (e) => {
-        dispatch({type: e.target.id, payload: e.target.value})
+        dispatch({type: e.target.id, payload: e.target.value});
     }
     
     return (
@@ -73,8 +72,8 @@ export default function EditPost(props) {
                 <input onChange={handleChange} placeholder="Enter your title!" id="titleEditPostInput" defaultValue={state.postForEdit.title}/> <br />
                 <label htmlFor="body">Body</label><br />
                 <input onChange={handleChange} placeholder="Enter your post!" id="bodyEditPostInput" defaultValue={state.postForEdit.body}/> <br />
-                <Link to="/Posts" id="cancelLink"><button onClick={cancelPostEdit} id="cancelEditPost">Back</button></Link>
-                <Link to="/Posts" id="saveLink"><button onClick={editPostFunc} id="saveEditPost">Save Changes</button></Link>
+                <Link to="/posts" id="cancelLink"><button id="cancelEditPost">Back</button></Link>
+                <Link to="/posts" id="saveLink"><button onClick={editPostFunc} id="saveEditPost">Save Changes</button></Link>
             </div>
         </div>
     )
